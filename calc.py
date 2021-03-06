@@ -21,6 +21,7 @@ elif operation == '^':
  result = delimoe ** delitel
 else:
  result = "unknown"
+#lol
 #print(type(result))
 
 print("Result: " + str(result))
