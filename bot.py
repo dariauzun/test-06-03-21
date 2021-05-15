@@ -9,3 +9,9 @@
 
 напишем обработчик входящих сообщений через команды help и schedule (1 отвечает за краткую информацию о платформе, 2 высылает расписание мероприятий)
 """
+import telebot
+bot = telebot.TeleBot('1827099486:AAFnrUzG0chBM7MCIT2cBGgDo6CtMOa7zPQ')
+@bot.message_handler(commands=['start'])
+def start_command(message):
+    bot.send_message(message.chat.id, "Hello!")
+bot.polling()
