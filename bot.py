@@ -12,24 +12,40 @@
 
 import telebot
 import gzcamp_bot
+from telebot import types
 import datetime
 
 # TOKEN = gzcamp_bot.1883015533:AAGn0-6zRCyq9tJV0gCJ6kyj5-0l85dyT7c
 bot = telebot.TeleBot('1883015533:AAGn0-6zRCyq9tJV0gCJ6kyj5-0l85dyT7c')
-@bot.message_handler(content_types=['text'])
-
+@bot.message_handler(content_types=['start'])
 def start(message):
-	bot.send_message(message.from_user.id, 'Здравствуйте, {message.from_user.first_name}!')
+	bot.send_message(message.from_user.id, 'Здравствуйте, {message.from_user.first_name}! Что Вас интересует?')
 	#bot.register_next_step_handler(message, data)
-
 def get_respond(message):
 	bot.send_chat_action(message.from_user.id, 'typing')
 	if message.text == "Здравствуйте":
 		markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
-		key1 = types.KeyboardButton('Online события')
-		key2 = types.KeyboardButton('Offline события') 
+		key1 = types.KeyboardButton('Online events')
+		key2 = types.KeyboardButton('Offline events') 
 		markup.add(key1, key2)
 
+def name(m):
+    if message.text == "Месяц":
+        markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+        key1 = types.KeyboardButton('Июнь')
+        key2 = types.KeyboardButton('Июль') 
+        markup.add(key1, key2)
+    elif message.text == "Формат":
+        markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+        key3 = types.KeyboardButton('Online')
+        key4 = types.KeyboardButton('Offline') 
+        markup.add(key3, key4)
+    elif message.text == "Событие":
+        markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+        key5 = types.KeyboardButton('Как')
+        key6 = types.KeyboardButton('Что') 
+        markup.add(key5, key6)
+   
 @bot.message_handler(commands=['info'])
 def send_welcome(message):
         name = bot.get_me()
@@ -44,7 +60,7 @@ class MyEvent(object):
     event_date = datetime.date(2021, 6, 5)
     
     def __init__(self, line):
-        self.event_name = line.split('')[0]
+        self.event_name = line.split(' ')[0]
         pass
 
 events = []
