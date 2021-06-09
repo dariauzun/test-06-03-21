@@ -134,5 +134,34 @@ def typ(message):
     elif message.text == 'Разговор с экспертом':
         bot.send_message(message.chat.id, "11/06/2021б 16:00б шоу-рум ГАЗ на Белорусской")
 bot.polling(none_stop=True)
+
+def send_welcome(message):
+        name = bot.get_me()
+        print(name)
+        bot.reply_to(message, "Welcome")
+        
+with open('gazdata.txt','r') as f:
+  lines = f.readlines()
+
+class MyEvent(object):
+    event_name = 'Как настроить логистику для вашего бизнеса'
+    event_date = datetime.date(2021, 6, 5)
+    
+    def init(self, line):
+        self.event_name = line.split(' ')[0]
+        pass
+
+events = []
+for l in lines:
+    #'Как настроить логистику для вашего бизнеса', '2021, 5, 27'
+    events.append(MyEvent(l)) #['Как настроить логистику для вашего бизнеса', '27/05']
+    
+class MyUser(object):
+    name = '@uzunishe'
+    user_events = []
+    
+my_users = {'tg_name': MyUser}
+for l in lines:
+    pass
 #bot.polling(none_stop=True)
 #@bot.message_handler(commands=['info'])
